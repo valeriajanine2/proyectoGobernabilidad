@@ -1,0 +1,80 @@
+### Test API redmine
+@key = 09c70efcedec95629e1e355531d5288a948622eb
+@baseUrl = http://172.17.238.81/redmine
+@issue_id = 4
+@project_id = 1
+
+
+### Crear un proyecto 
+POST {{baseUrl}}/projects.json
+Content-Type: application/json
+X-Redmine-API-Key: {{key}}
+
+{
+  "project": {
+    "name": "Nuevo Proyecto ", 
+    "identifier": "proyecto2", 
+    "description": "Probando crear otro proyecto"
+  }
+}
+
+### Modificar Proyecto
+PUT {{baseUrl}}/projects/{{project_id}}.json
+Content-Type: application/json
+X-Redmine-API-Key: {{key}}
+
+{
+  "project": {
+    "description": "Probando modificación del proyecto"
+  }
+}
+
+### Eliminar Proyecto
+DELETE {{baseUrl}}/projects/{{project_id}}.json
+X-Redmine-API-Key: {{key}}
+
+### Crear una Petición
+POST {{baseUrl}}/issues.json
+Content-Type: application/json
+X-Redmine-API-Key: {{key}}
+
+{
+  "issue": {
+    "project_id": {{project_id}},
+    "subject": "Nueva Petición desde HTTP",
+    "description": "Creando una nueva petición.",
+    "priority_id": 1  
+  }
+}
+
+### Ver Peticiones
+GET {{baseUrl}}/issues.json
+X-Redmine-API-Key: {{key}}
+
+### Modificar Peticiones
+PUT {{baseUrl}}/issues/{{issue_id}}.json
+Content-Type: application/json
+X-Redmine-API-Key: {{key}}
+
+{
+  "issue": {
+    "description": "Probando modificación de la petición"
+  }
+}
+
+### Prioritize an Issue
+PUT {{baseUrl}}/issues/{{issue_id}}.json
+Content-Type: application/json
+X-Redmine-API-Key: {{key}}
+
+{
+  "issue": {
+    "priority_id": 2  
+  }
+}
+
+### Eliminar Peticiones
+DELETE {{baseUrl}}/issues/{{issue_id}}.json
+X-Redmine-API-Key: {{key}}
+
+
